@@ -33,7 +33,7 @@ Structure
                 .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_SECONDS);
     }
 ```
-- Here scopes are simply contract between AuthenticationServer and ResourceServer. They can be anything. They are akin to Spring Security's User Roles. Based on them we can make some evaluations like forbidding the users to delete a resource if they have no 'delete' scope.
+- Here scopes are simply contract between AuthenticationServer and ResourceServer. They can be anything. They are akin to Spring Security's User Roles. Based on them we can make some evaluations like forbidding the users to delete a resource if they have no 'delete' scope. [More on scopes](http://www.zakariaamine.com/2018-03-01/using-oauth2-in-spring-scopes)
 
 - Grant Types on [OAuth Website](https://oauth.net/2/grant-types/), [AlexBilbie](https://alexbilbie.com/guide-to-oauth-2-grants/), [Okta on Implicit Type](https://developer.okta.com/blog/2018/05/24/what-is-the-oauth2-implicit-grant-type), [Okta on Authorization Code](https://developer.okta.com/blog/2018/04/10/oauth-authorization-code-grant-type)
 
@@ -188,21 +188,21 @@ Controller is a `@RestController` that has the following methods
 ## Testing in POSTMAN
 #### Getting Token
  - Provide client id and client secret
-![Structure](images/getting_token_1.png)
+![Structure](images/getting_token_1_.png)
 
 - Provide credentials and grant type
-![Structure](images/getting_token_2.png)
+![Structure](images/getting_token_2_.png)
 
 - Later on each request we'll also append access_token to the request URL
 
 #### GET Request Example
-![Structure](images/get.png)
+![Structure](images/get_.png)
 
 #### POST Request Example
-![Structure](images/post.png)
+![Structure](images/post_.png)
 
 #### DELETE Request Example
 here it won't let us delete because the current user has no scope for deleting 
-![Structure](images/delete.png)
+![Structure](images/delete_.png)
 
 Tutorial from [here](https://www.devglan.com/spring-security/spring-boot-security-oauth2-example) is followed
