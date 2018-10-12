@@ -15,7 +15,7 @@ Structure
 ## Security Configurations
 ### Create an AuthorizationServerConfig in /config package that extends AuthorizationServerConfigurerAdapter
 
-```
+```java
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
@@ -39,7 +39,7 @@ Structure
 
 - `AuthorizationServerEndpointsConfigurer` actually supports all the grant types, except passwords. To enable this ability, `AuthenticationManager` is injected
 
-```
+```java
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
                 // persistence of tokens
@@ -52,7 +52,7 @@ Structure
 ### Create a ResourceServerConfig in /config package that extends ResourceServerConfigurerAdapter
 A Resource Server (can be the same as the Authorization Server or a separate application) serves resources that are protected by the OAuth2 token. Spring OAuth provides a Spring Security authentication filter that implements this protection. You can switch it on with `@EnableResourceServer` on an `@Configuration` class, and configure it (as necessary) using a `ResourceServerConfigurer`.
 
-```
+```java
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources
                 .resourceId(RESOURCE_ID)
@@ -76,7 +76,7 @@ A Resource Server (can be the same as the Authorization Server or a separate app
 ### SecurityConfig in /config package that extends WebSecurityConfigurerAdapter
 Explanation on `@EnableGlobalMethodSecurity(prePostEnabled = true)` annotation. This annotation enables AOP security. So by setting `prePostEnabled=true` we enable `@PreAuthorize` and `@PostAuthorize` annotations which lets us to perform security on method level. For more info check [here](http://websystique.com/spring-security/spring-security-4-method-security-using-preauthorize-postauthorize-secured-el/)
 
-```
+```java
     @Autowired
     @Qualifier("userService")
     private UserDetailsService userDetailsService;
@@ -103,7 +103,7 @@ Explanation on `@EnableGlobalMethodSecurity(prePostEnabled = true)` annotation. 
 ### User Service
 User Service is a regular service class that has nothing fancy
 
-```
+```java
 public interface UserService{
 
     User save(User user);
@@ -115,7 +115,8 @@ public interface UserService{
 
 ### User Service Implementation Class
 Here `UserService` is our service layer interface, but `UserDetailsService` is the class provided by Spring Security. By implementing it, we have to also override `UserDetails loadUserByUsername(String username)` method as well 
-```
+
+```java
 @Service("userService")
 public class UserServiceImpl implements UserDetailsService, UserService{
     
@@ -141,7 +142,8 @@ public class UserServiceImpl implements UserDetailsService, UserService{
 
 ### Model class is so simple
 This is the User class that is managed by us, not the Spring provided one
-```
+
+```java
 @Entity
 @Data
 public class User {
@@ -169,7 +171,7 @@ public class User {
 ## Controller
 Controller is a `@RestController` that has the following methods
 
-```
+```java
     @GetMapping("/user")
     public List listUser();
 
